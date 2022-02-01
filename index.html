@@ -14,6 +14,27 @@
     <link href="styles.css" />
   </head>
   <body>
+    <div class="d-flex justify-content-evenly">
+      <div
+        class="d-flex justify-content-evenly mt-4 px-4 py-3 border border-3 border-primary"
+        id="buttonContainer"
+      >
+        <button type="button" class="btn btn-outline-primary me-3" id="newdie">
+          New Die!
+        </button>
+        <button type="button" class="btn btn-outline-primary mx-3" id="reroll">
+          Reroll!
+        </button>
+        <button type="button" class="btn btn-outline-primary mx-3" id="sum">
+          Sum!
+        </button>
+        <button type="button" class="btn btn-outline-primary ms-3" id="pip">
+          Show me your pips!
+        </button>
+      </div>
+    </div>
+    <div id="dieContainer"></div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="app.js"></script>
   </body>
