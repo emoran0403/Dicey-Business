@@ -33,7 +33,20 @@ class Die {
 }
 
 $(`#newdie`).click(function () {
+  console.log(`newdie was pressed`);
   // does not work yet
-  let newDie = new Die();
-  $(newDie).appendTo(dieContainer);
+  //   let newDie = new Die();
+  //   $(newDie).appendTo(dieContainer);
+});
+
+$(`#reroll`).click(function () {
+  console.log(`reroll was pressed`);
+});
+
+$(`#sum`).click(function () {
+  console.log(`sum was pressed`);
+});
+
+$(`#pip`).click(function () {
+  console.log(`pip was pressed`);
 });
