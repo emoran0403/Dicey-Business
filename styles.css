@@ -1,9 +1,12 @@
-#dieContainer {
+/* #dieContainer {
   height: 800px;
 }
 
 #dieContainer > div {
-  /*this is not working*/
   height: 50px;
   width: 50px;
+} */
+
+.die {
+  font-size: xx-large;
 }
