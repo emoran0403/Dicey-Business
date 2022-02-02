@@ -84,31 +84,22 @@ $(`#newdie`).click(function () {
 $(`#reroll`).click(function () {
   /**
    * needs to select all die in the currentDice array and call the roll method on each of them
+   * this also needs to update the die representations on the screen to match that of those in the array
    * for Each array method, or a for loop should work here
    */
 
-  console.log(`reroll was pressed`);
-  let tempvar = currentDice[0];
-  tempvar.roll();
-  console.log(currentDice);
-
-  // currentDice.forEach(() => {
-  //   console.log(`my for Each is working!`); //*logging
-  //   for (let i = 0; i < currentDice.length; i++) {
-  //     console.log(`my for loop is working`);
-  //     currentDice[i].roll();
-  //   }
-  // });
+  for (let i = 0; i < currentDice.length; i++) {
+    // console.log(`my for loop is working`); //* logging
+    currentDice[i].roll();
+    let newRoll = currentDice[i].value;
+    $(`#${i}`).text(newRoll);
+  }
+  //console.log(currentDice); //* logging
 });
 
 $(`#sum`).click(function () {
   console.log(`sum was pressed`);
-  /**
-   * calls a function that returns the value of each die in the currentDice aray
-   *
-   *
-   *
-   */
+  //calls a function that returns the value of each die in the currentDice aray
   let sum = 0;
   for (let i = 0; i < currentDice.length; i++) {
     sum += currentDice[i].value;
