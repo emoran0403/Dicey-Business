@@ -9,12 +9,12 @@
  * 
  //! make it so the die container on the page starts out big enough to not require a resize when die are put on the screen
  * 
- * ⚀ die face-1. U+2680.
-⚁ die face-2. U+2681.
-⚂ die face-3. U+2682.
-⚃ die face-4. U+2683.
-⚄ die face-5. U+2684.
-⚅ die face-6. U+2685.
+ * ⚀ die face-1. U+2680 - &#9856
+⚁ die face-2. U+2681 - &#9857
+⚂ die face-3. U+2682. - &#9858
+⚃ die face-4. U+2683. - &#9859
+⚄ die face-5. U+2684. - &#9860
+⚅ die face-6. U+2685. - &#9861
 🎲 game die. U+1F3B2.
  */
 
@@ -55,7 +55,7 @@ $(`#newdie`).click(function () {
   myDie.roll(); //  sets the initial value of the die from undefined to a random die value
 
   //sets styles and text value
-  let mydieholder = $(`<div class="col-1 my-3">`); // this div holds the die
+  let mydieholder = $(`<div class="dieParent col-1 my-3">`); // this div holds the die
   let myPageDie = $(`<div class="die py-3">`) // this div is the representation of the die
     .text(myDie.value)
     .addClass(
@@ -99,10 +99,31 @@ $(`#sum`).click(function () {
 
 $(`#pip`).click(function () {
   console.log(`pip was pressed`);
+  let temp = $(`.die`);
   /**
    * changes the text content from numbers to pips - based on a big switch block?
-   *
-   *
-   *
    */
+
+  // for (let i = 0; i < temp.length; i++) {}
+  console.log(temp);
 });
+
+// switch ($(`#${i}`).text) {
+//   case 1:
+//     $(`#${i}`).text("&#9856");
+//     break;
+//   case 2:
+//     $(`#${i}`).text("&#9857");
+//     break;
+//   case 3:
+//     $(`#${i}`).text("&#9858");
+//     break;
+//   case 4:
+//     $(`#${i}`).text("&#9859");
+//     break;
+//   case 5:
+//     $(`#${i}`).text("&#9860");
+//     break;
+//   case 6:
+//     $(`#${i}`).text("&#9861");
+// }
