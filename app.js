@@ -103,37 +103,32 @@ $(`#pip`).click(function () {
    */
 
   // console.log(`pip was pressed`); //*logging
-  let temp = $(`.dieParent > .die`);
+  let dieOnPage = $(`.dieParent > .die`);
+  // this selector finds all the die representations
+  let dieOnPageText = dieOnPage.text();
 
-  for (let i = 0; i < temp.length; i++) {
-    console.log(`there are ${i} dice`);
-  }
+  console.log(dieOnPageText);
 
-  // let x = temp[0];
-  // let y = x.text();
-  // console.log(x);
-  // console.log(y);
-  // console.log(temp.length);
-  // console.log(temp);
-  // console.log(temp.text()); //* logging
+  // for (let i = 0; i < dieOnPage.length; i++) {
+  // }
 });
 
-// switch ($(temp.text) {
-//   case 1:
-//     $(`#${i}`).text("&#9856");
-//     break;
-//   case 2:
-//     $(`#${i}`).text("&#9857");
-//     break;
-//   case 3:
-//     $(`#${i}`).text("&#9858");
-//     break;
-//   case 4:
-//     $(`#${i}`).text("&#9859");
-//     break;
-//   case 5:
-//     $(`#${i}`).text("&#9860");
-//     break;
-//   case 6:
-//     $(`#${i}`).text("&#9861");
-// }
+// switch ($(temp.text())) {
+//       case 1:
+//         $(`#${i}`).text("&#9856");
+//         break;
+//       case 2:
+//         $(`#${i}`).text("&#9857");
+//         break;
+//       case 3:
+//         $(`#${i}`).text("&#9858");
+//         break;
+//       case 4:
+//         $(`#${i}`).text("&#9859");
+//         break;
+//       case 5:
+//         $(`#${i}`).text("&#9860");
+//         break;
+//       case 6:
+//         $(`#${i}`).text("&#9861");
+//     }
