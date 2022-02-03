@@ -34,7 +34,7 @@ let currentDice = [];
 class Die {
   // creates a class called Die
 
-  static id = 1; // this will eventually be used to give each die a unique id
+  static id = 0; // this will eventually be used to give each die a unique id
 
   constructor() {
     this.value = undefined; // sets the default value to undefined
@@ -47,14 +47,9 @@ class Die {
   }
 }
 
+// generates a new die instance, stores that object in the currentDice array, and displays a representation of that on the page
 $(`#newdie`).click(function () {
   console.log(`newdie was pressed`);
-  /**
-   * needs to create a new die object //?done
-   * needs to make a die display inside dieContainer//?done
-   * needs to make that die show its current value//? done
-   * needs to add it to to currentDice array//?done
-   */
 
   let myDie = new Die(); // myDie is a new instance of the Die class
   myDie.roll(); //  sets the initial value of the die from undefined to a random die value
@@ -81,13 +76,8 @@ $(`#newdie`).click(function () {
   console.log(currentDice); //*logging
 });
 
+// loops through the currentDice array, calls the reroll method on each die, and updates the display
 $(`#reroll`).click(function () {
-  /**
-   * needs to select all die in the currentDice array and call the roll method on each of them
-   * this also needs to update the die representations on the screen to match that of those in the array
-   * for Each array method, or a for loop should work here
-   */
-
   for (let i = 0; i < currentDice.length; i++) {
     // console.log(`my for loop is working`); //* logging
     currentDice[i].roll();
@@ -97,9 +87,9 @@ $(`#reroll`).click(function () {
   //console.log(currentDice); //* logging
 });
 
+// calls a function that returns the value of each die in the currentDice aray
 $(`#sum`).click(function () {
   console.log(`sum was pressed`);
-  //calls a function that returns the value of each die in the currentDice aray
   let sum = 0;
   for (let i = 0; i < currentDice.length; i++) {
     sum += currentDice[i].value;
