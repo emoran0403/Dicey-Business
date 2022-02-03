@@ -98,17 +98,27 @@ $(`#sum`).click(function () {
 });
 
 $(`#pip`).click(function () {
-  console.log(`pip was pressed`);
-  let temp = $(`.die`);
   /**
    * changes the text content from numbers to pips - based on a big switch block?
    */
 
-  // for (let i = 0; i < temp.length; i++) {}
-  console.log(temp);
+  // console.log(`pip was pressed`); //*logging
+  let temp = $(`.dieParent > .die`);
+
+  for (let i = 0; i < temp.length; i++) {
+    console.log(`there are ${i} dice`);
+  }
+
+  // let x = temp[0];
+  // let y = x.text();
+  // console.log(x);
+  // console.log(y);
+  // console.log(temp.length);
+  // console.log(temp);
+  // console.log(temp.text()); //* logging
 });
 
-// switch ($(`#${i}`).text) {
+// switch ($(temp.text) {
 //   case 1:
 //     $(`#${i}`).text("&#9856");
 //     break;
