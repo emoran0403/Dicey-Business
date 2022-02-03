@@ -10,12 +10,12 @@
  //! make it so the die container on the page starts out big enough to not require a resize when die are put on the screen
  * 
  * ⚀ die face-1. U+2680 - &#9856
-⚁ die face-2. U+2681 - &#9857
-⚂ die face-3. U+2682. - &#9858
-⚃ die face-4. U+2683. - &#9859
-⚄ die face-5. U+2684. - &#9860
-⚅ die face-6. U+2685. - &#9861
-🎲 game die. U+1F3B2.
+ * ⚁ die face-2. U+2681 - &#9857
+ * ⚂ die face-3. U+2682. - &#9858
+ * ⚃ die face-4. U+2683. - &#9859
+ * ⚄ die face-5. U+2684. - &#9860
+ * ⚅ die face-6. U+2685. - &#9861
+ * 🎲 game die. U+1F3B2.
  */
 
 let dieContainer = $(`#dieContainer`);
@@ -25,10 +25,6 @@ let currentDice = [];
  * this will serve as an array for the current dice.
  * summing will be done via loop or array methods, each calling on the value proprerty of each die.
  * removing a die from the array can be done by the splice method?  or maybe make a new array with map, leaving off the old die.
- *
- *
- *
- *
  *  */
 
 class Die {
@@ -103,22 +99,6 @@ $(`#pip`).click(function () {
   for (i = 0; i < allDieObject.length; i++) {
     let textCompare = allDieObject[i].innerText;
 
-    // if (textCompare === `1`) {
-    //   allDieObject[i].innerText = `⚀`;
-    // } else if (textCompare === `2`) {
-    //   allDieObject[i].innerText = `⚁`;
-    // } else if (textCompare === `3`) {
-    //   allDieObject[i].innerText = `⚂`;
-    // } else if (textCompare === `4`) {
-    //   allDieObject[i].innerText = `⚃`;
-    // } else if (textCompare === `5`) {
-    //   allDieObject[i].innerText = `⚄`;
-    // } else if (textCompare === `6`) {
-    //   allDieObject[i].innerText = `&#9861`;
-    // } else {
-    //   // this is lame
-    // }
-
     switch (textCompare) {
       case `1`:
         allDieObject[i].innerText = `⚀`;
@@ -141,25 +121,16 @@ $(`#pip`).click(function () {
   }
 });
 
-// &#9857
-// ⚂ die face-3. U+2682. - &#9858
-// ⚃ die face-4. U+2683. - &#9859
-// ⚄ die face-5. U+2684. - &#9860
-// ⚅ die face-6. U+2685. - &#9861
-
-// let tempArray = []; // makes an empty array
-//   let dieOnPage = $(`.dieParent > .die`); // finds the elements i want
-//   tempArray = dieOnPage; // pops the dies into the array?
-
-//   console.log(`temp array `);
-
-//   console.log(tempArray);
-//   console.log(`temp array lenght`);
-//   console.log(tempArray.length);
-
-//   for (let i = 0; i < tempArray; i++) {
-//     let myText = tempArray[i].text();
-//     if ((myText = 1)) {
-//       tempArray[i].text(`work pls`);
-//     }
-//   }
+/**
+ *
+ *
+ * if pip mode = true
+ * then new die must get their numerical value on the object
+ * and display their pips
+ * old die must swap to pips
+ *
+ * if pip mode = false
+ * then new die must display their numerical value on the object
+ * display their number
+ * old die must swap to numbers
+ */
