@@ -97,38 +97,69 @@ $(`#sum`).click(function () {
   alert(sum);
 });
 
+let allDieObject = document.getElementsByClassName("die"); // this is an array of objects - use: allDieObject[i].innerText
+
 $(`#pip`).click(function () {
-  /**
-   * changes the text content from numbers to pips - based on a big switch block?
-   */
+  for (i = 0; i < allDieObject.length; i++) {
+    let textCompare = allDieObject[i].innerText;
 
-  // console.log(`pip was pressed`); //*logging
-  let dieOnPage = $(`.dieParent > .die`);
-  // this selector finds all the die representations
-  let dieOnPageText = dieOnPage.text();
+    // if (textCompare === `1`) {
+    //   allDieObject[i].innerText = `⚀`;
+    // } else if (textCompare === `2`) {
+    //   allDieObject[i].innerText = `⚁`;
+    // } else if (textCompare === `3`) {
+    //   allDieObject[i].innerText = `⚂`;
+    // } else if (textCompare === `4`) {
+    //   allDieObject[i].innerText = `⚃`;
+    // } else if (textCompare === `5`) {
+    //   allDieObject[i].innerText = `⚄`;
+    // } else if (textCompare === `6`) {
+    //   allDieObject[i].innerText = `&#9861`;
+    // } else {
+    //   // this is lame
+    // }
 
-  console.log(dieOnPageText);
-
-  // for (let i = 0; i < dieOnPage.length; i++) {
-  // }
+    switch (textCompare) {
+      case `1`:
+        allDieObject[i].innerText = `⚀`;
+        break;
+      case `2`:
+        allDieObject[i].innerText = `⚁`;
+        break;
+      case `3`:
+        allDieObject[i].innerText = `⚂`;
+        break;
+      case `4`:
+        allDieObject[i].innerText = `⚃`;
+        break;
+      case `5`:
+        allDieObject[i].innerText = `⚄`;
+        break;
+      case `6`:
+        allDieObject[i].innerText = `⚅`;
+    }
+  }
 });
 
-// switch ($(temp.text())) {
-//       case 1:
-//         $(`#${i}`).text("&#9856");
-//         break;
-//       case 2:
-//         $(`#${i}`).text("&#9857");
-//         break;
-//       case 3:
-//         $(`#${i}`).text("&#9858");
-//         break;
-//       case 4:
-//         $(`#${i}`).text("&#9859");
-//         break;
-//       case 5:
-//         $(`#${i}`).text("&#9860");
-//         break;
-//       case 6:
-//         $(`#${i}`).text("&#9861");
+// &#9857
+// ⚂ die face-3. U+2682. - &#9858
+// ⚃ die face-4. U+2683. - &#9859
+// ⚄ die face-5. U+2684. - &#9860
+// ⚅ die face-6. U+2685. - &#9861
+
+// let tempArray = []; // makes an empty array
+//   let dieOnPage = $(`.dieParent > .die`); // finds the elements i want
+//   tempArray = dieOnPage; // pops the dies into the array?
+
+//   console.log(`temp array `);
+
+//   console.log(tempArray);
+//   console.log(`temp array lenght`);
+//   console.log(tempArray.length);
+
+//   for (let i = 0; i < tempArray; i++) {
+//     let myText = tempArray[i].text();
+//     if ((myText = 1)) {
+//       tempArray[i].text(`work pls`);
 //     }
+//   }
