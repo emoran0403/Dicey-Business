@@ -192,3 +192,9 @@ function pipToNum() {
     }
   }
 }
+
+//! $(selector).click(function)
+// https://www.w3schools.com/jquery/event_click.asp
+
+//! $(selector).dblclick(function)
+// https://www.w3schools.com/jquery/event_dblclick.asp
