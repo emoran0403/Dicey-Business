@@ -90,15 +90,59 @@ $(`#newdie`).click(function () {
   }
   console.log(currentDice);
 
-  //appends the die to the page
-  $(myPageDie).appendTo(mydieholder);
+  //************************************************************ */ single click will reroll a single die
+  myPageDie.click(() => {
+    // anonymous functions!
+    // console.log(`single click function has fired!`);
+    let thisDieId = myDie.id;
+    // console.log(`the line below will log the clicked on die in the array`);
+    // console.log(currentDice[thisDieId]);
+
+    // console.log(`the line below calls the roll function for that die`);
+    currentDice[thisDieId].roll();
+
+    // console.log(
+    //   `the line below will log the current die in the array, and i should see a new value`
+    // );
+    // console.log(currentDice[thisDieId]);
+
+    if (pipsActive) {
+      console.log(myDie.value);
+      switch (myDie.value.toString()) {
+        case `1`:
+          myPageDie.text(`⚀`);
+          break;
+        case `2`:
+          myPageDie.text(`⚁`);
+          break;
+        case `3`:
+          myPageDie.text(`⚂`);
+          break;
+        case `4`:
+          myPageDie.text(`⚃`);
+          break;
+        case `5`:
+          myPageDie.text(`⚄`);
+          break;
+        case `6`:
+          myPageDie.text(`⚅`);
+      }
+    } else {
+      myPageDie.text(myDie.value);
+    }
+    console.log(currentDice);
+
+    // console.log(`myDie.id`);
+    // console.log(myDie.id);
+  });
+
+  $(myPageDie).appendTo(mydieholder); //appends the die to the page
   $(mydieholder).appendTo(dieContainer);
 
   // console.log(myDie); //*logging
   // console.log(`the die's value is ${myDie.value}`); //*logging
 
-  // adds the die to the currentDice array
-  currentDice.push(myDie);
+  currentDice.push(myDie); // adds the die to the currentDice array
 
   // console.log(currentDice); //*logging
 });
@@ -112,6 +156,7 @@ $(`#reroll`).click(function () {
     $(`#${i}`).text(newRoll);
   }
   //console.log(currentDice); //* logging
+  setDisplay();
 });
 
 // calls a function that returns the value of each die in the currentDice aray
@@ -125,14 +170,15 @@ $(`#sum`).click(function () {
 });
 
 $(`#pip`).click(function () {
-  // this toggles the pip display
+  // this toggles the pip display, then calls the setDisplay function to set the display changes
   if (pipsActive) {
-    pipToNum();
+    // pipToNum();
     pipsActive = false;
   } else {
-    numToPip();
+    // numToPip();
     pipsActive = true;
   }
+  setDisplay();
 });
 
 function numToPip() {
@@ -193,8 +239,72 @@ function pipToNum() {
   }
 }
 
+function setDisplay() {
+  // this function controls whether to display pips or numbers on new or existing die
+  if (pipsActive) {
+    // this display is used when pips are active
+    for (i = 0; i < allDieObject.length; i++) {
+      let textCompare = allDieObject[i].innerText;
+
+      switch (textCompare) {
+        case `⚀`:
+          allDieObject[i].innerText = `1`;
+          break;
+        case `⚁`:
+          allDieObject[i].innerText = `2`;
+          break;
+        case `⚂`:
+          allDieObject[i].innerText = `3`;
+          break;
+        case `⚃`:
+          allDieObject[i].innerText = `4`;
+          break;
+        case `⚄`:
+          allDieObject[i].innerText = `5`;
+          break;
+        case `⚅`:
+          allDieObject[i].innerText = `6`;
+      }
+    }
+  } else {
+    // this display is used when pips are inactive
+    for (i = 0; i < allDieObject.length; i++) {
+      let textCompare = allDieObject[i].innerText;
+
+      switch (textCompare) {
+        case `1`:
+          allDieObject[i].innerText = `⚀`;
+          break;
+        case `2`:
+          allDieObject[i].innerText = `⚁`;
+          break;
+        case `3`:
+          allDieObject[i].innerText = `⚂`;
+          break;
+        case `4`:
+          allDieObject[i].innerText = `⚃`;
+          break;
+        case `5`:
+          allDieObject[i].innerText = `⚄`;
+          break;
+        case `6`:
+          allDieObject[i].innerText = `⚅`;
+      }
+    }
+  }
+}
+
 //! $(selector).click(function)
 // https://www.w3schools.com/jquery/event_click.asp
+// Add a feature where clicking on a die on the page causes just that one die to roll, updating its face value
+/**
+ * the event listener on that particular die-div will have access to its id, which also matches the id inside the array
+ * this will need to call roll() on the die
+ * check if roll() updates the die within the array itself
+ *
+ *
+ */
 
 //! $(selector).dblclick(function)
 // https://www.w3schools.com/jquery/event_dblclick.asp
+// Add a feature where double clicking on a die on the page causes that die to be removed from the page
