@@ -18,13 +18,13 @@
  * 🎲 game die. U+1F3B2.
  */
 
-let dieContainer = $(`#dieContainer`);
+let dieContainer = $(`#dieContainer`); // this is the div that holds an individual die
 
-let pipsActive = false;
+let pipsActive = false; // this controls the state of displaying pips or not
 
-let allDieObject = document.getElementsByClassName("die"); // this is an array of objects - use: allDieObject[i].innerText
+let allDieObject = document.getElementsByClassName("die"); // this is an array of objects that contains each die-div on screen - use: allDieObject[i].innerText
 
-let currentDice = [];
+let currentDice = []; // this array will hold all the die objects
 
 /**
  * this will serve as an array for the current dice.
@@ -64,98 +64,36 @@ $(`#newdie`).click(function () {
     .attr("id", myDie.id); // matches the die representation id to be the same as the id of the object die
 
   // displays the value of new dice on screen as pips or numbers depending on the state of pipsActive
-  if (pipsActive) {
-    console.log(myDie.value);
-    switch (myDie.value.toString()) {
-      case `1`:
-        myPageDie.text(`⚀`);
-        break;
-      case `2`:
-        myPageDie.text(`⚁`);
-        break;
-      case `3`:
-        myPageDie.text(`⚂`);
-        break;
-      case `4`:
-        myPageDie.text(`⚃`);
-        break;
-      case `5`:
-        myPageDie.text(`⚄`);
-        break;
-      case `6`:
-        myPageDie.text(`⚅`);
-    }
-  } else {
-    myPageDie.text(myDie.value);
-  }
-  console.log(currentDice);
+
+  myPageDie.text(myDie.value);
+  currentDice.push(myDie); // adds the die to the currentDice array
+
+  console.log(currentDice); //*logging
 
   //************************************************************ */ single click will reroll a single die
   myPageDie.click(() => {
     // anonymous functions!
-    // console.log(`single click function has fired!`);
-    let thisDieId = myDie.id;
-    // console.log(`the line below will log the clicked on die in the array`);
-    // console.log(currentDice[thisDieId]);
 
-    // console.log(`the line below calls the roll function for that die`);
-    currentDice[thisDieId].roll();
+    let thisDieId = myDie.id; // gets the id of the die, so it knows which one to roll later
 
-    // console.log(
-    //   `the line below will log the current die in the array, and i should see a new value`
-    // );
-    // console.log(currentDice[thisDieId]);
-
-    if (pipsActive) {
-      console.log(myDie.value);
-      switch (myDie.value.toString()) {
-        case `1`:
-          myPageDie.text(`⚀`);
-          break;
-        case `2`:
-          myPageDie.text(`⚁`);
-          break;
-        case `3`:
-          myPageDie.text(`⚂`);
-          break;
-        case `4`:
-          myPageDie.text(`⚃`);
-          break;
-        case `5`:
-          myPageDie.text(`⚄`);
-          break;
-        case `6`:
-          myPageDie.text(`⚅`);
-      }
-    } else {
-      myPageDie.text(myDie.value);
-    }
-    console.log(currentDice);
-
-    // console.log(`myDie.id`);
-    // console.log(myDie.id);
+    currentDice[thisDieId].roll(); // calls the roll function, giving the die a new value
+    setDisplay(); // updates the display for all die on the page
   });
 
   $(myPageDie).appendTo(mydieholder); //appends the die to the page
   $(mydieholder).appendTo(dieContainer);
-
-  // console.log(myDie); //*logging
-  // console.log(`the die's value is ${myDie.value}`); //*logging
-
-  currentDice.push(myDie); // adds the die to the currentDice array
-
-  // console.log(currentDice); //*logging
+  setDisplay(); // this must be after appending, since setDisplay depends on the allDieObject
 });
 
 // loops through the currentDice array, calls the reroll method on each die, and updates the display
 $(`#reroll`).click(function () {
   for (let i = 0; i < currentDice.length; i++) {
     // console.log(`my for loop is working`); //* logging
-    currentDice[i].roll();
-    let newRoll = currentDice[i].value;
-    $(`#${i}`).text(newRoll);
+    currentDice[i].roll(); // runs through the array, calling the roll function on each object
+    let newRoll = currentDice[i].value; // stores the value in a variable
+    $(`#${i}`).text(newRoll); // sets the value as that text
   }
-  //console.log(currentDice); //* logging
+  console.log(currentDice); //* logging
   setDisplay();
 });
 
@@ -172,106 +110,26 @@ $(`#sum`).click(function () {
 $(`#pip`).click(function () {
   // this toggles the pip display, then calls the setDisplay function to set the display changes
   if (pipsActive) {
-    // pipToNum();
+    // if pips are on, turn them off
     pipsActive = false;
   } else {
-    // numToPip();
+    //if pips are off, turn them on
     pipsActive = true;
   }
-  setDisplay();
+  setDisplay(); // change the display to reflect the new pip state
 });
 
-function numToPip() {
-  // this swaps all numbers to pips
-  pipsActive = true;
-
-  for (i = 0; i < allDieObject.length; i++) {
-    let textCompare = allDieObject[i].innerText;
-
-    switch (textCompare) {
-      case `1`:
-        allDieObject[i].innerText = `⚀`;
-        break;
-      case `2`:
-        allDieObject[i].innerText = `⚁`;
-        break;
-      case `3`:
-        allDieObject[i].innerText = `⚂`;
-        break;
-      case `4`:
-        allDieObject[i].innerText = `⚃`;
-        break;
-      case `5`:
-        allDieObject[i].innerText = `⚄`;
-        break;
-      case `6`:
-        allDieObject[i].innerText = `⚅`;
-    }
-  }
-}
-
-function pipToNum() {
-  // this swaps all pips to numbers
-  pipsActive = false;
-
-  for (i = 0; i < allDieObject.length; i++) {
-    let textCompare = allDieObject[i].innerText;
-
-    switch (textCompare) {
-      case `⚀`:
-        allDieObject[i].innerText = `1`;
-        break;
-      case `⚁`:
-        allDieObject[i].innerText = `2`;
-        break;
-      case `⚂`:
-        allDieObject[i].innerText = `3`;
-        break;
-      case `⚃`:
-        allDieObject[i].innerText = `4`;
-        break;
-      case `⚄`:
-        allDieObject[i].innerText = `5`;
-        break;
-      case `⚅`:
-        allDieObject[i].innerText = `6`;
-    }
-  }
-}
-
 function setDisplay() {
-  // this function controls whether to display pips or numbers on new or existing die
+  // this function updates the display of all die on screen to reflect the current pip state
   if (pipsActive) {
-    // this display is used when pips are active
+    // this runs when pips are active
     for (i = 0; i < allDieObject.length; i++) {
-      let textCompare = allDieObject[i].innerText;
+      // this goes through the array of die-divs on screen
+      let textCompare = allDieObject[i].innerText; // this stores their text - which matches the value
 
-      switch (textCompare) {
-        case `⚀`:
-          allDieObject[i].innerText = `1`;
-          break;
-        case `⚁`:
-          allDieObject[i].innerText = `2`;
-          break;
-        case `⚂`:
-          allDieObject[i].innerText = `3`;
-          break;
-        case `⚃`:
-          allDieObject[i].innerText = `4`;
-          break;
-        case `⚄`:
-          allDieObject[i].innerText = `5`;
-          break;
-        case `⚅`:
-          allDieObject[i].innerText = `6`;
-      }
-    }
-  } else {
-    // this display is used when pips are inactive
-    for (i = 0; i < allDieObject.length; i++) {
-      let textCompare = allDieObject[i].innerText;
-
-      switch (textCompare) {
+      switch (
+        textCompare // and switches them to pips
+      ) {
         case `1`:
           allDieObject[i].innerText = `⚀`;
           break;
@@ -292,6 +150,36 @@ function setDisplay() {
       }
     }
   }
+
+  if (!pipsActive) {
+    // this runs when pips are inactive
+    for (i = 0; i < allDieObject.length; i++) {
+      // this goes through the array of die-divs on screen
+      let textCompare = allDieObject[i].innerText; // this stores their text - which matches the value
+
+      switch (
+        textCompare // and switches them to numbers
+      ) {
+        case `⚀`:
+          allDieObject[i].innerText = `1`;
+          break;
+        case `⚁`:
+          allDieObject[i].innerText = `2`;
+          break;
+        case `⚂`:
+          allDieObject[i].innerText = `3`;
+          break;
+        case `⚃`:
+          allDieObject[i].innerText = `4`;
+          break;
+        case `⚄`:
+          allDieObject[i].innerText = `5`;
+          break;
+        case `⚅`:
+          allDieObject[i].innerText = `6`;
+      }
+    }
+  }
 }
 
 //! $(selector).click(function)
@@ -308,3 +196,33 @@ function setDisplay() {
 //! $(selector).dblclick(function)
 // https://www.w3schools.com/jquery/event_dblclick.asp
 // Add a feature where double clicking on a die on the page causes that die to be removed from the page
+/**
+ * checks the allDieObject, compares ids and removes it from the screen and the currentDice array
+ *
+ *
+ *
+ *
+ */
+
+/**
+ *
+ * new die immediately rolls a value
+ * call func setDisplay
+ *
+ *
+ * reroll rolls new values for all die
+ * call func setDisplay
+ *
+ * pips button is just a toggle for the pips state
+ *
+ *
+ *function setDisplay can do this:
+ *then it must check the state of the pips
+ * true - display pips
+ * false - display numbers
+ *
+ *
+ *
+ *
+ *
+ */
