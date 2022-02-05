@@ -93,6 +93,9 @@ $(`#newdie`).click(function () {
 
   //! double click will remove the die from the page
 
+  //? when i remove the first die, it will not let me reroll the last die on the screen
+  //? when i remove the first 2 die, it will not let me reroll the last 2 die on screen
+
   myPageDie.dblclick(() => {
     let thisDieId2 = myDie.id; // gets the id of the die, so it knows which one is being double clicked
     console.log(`double click has fired`);
