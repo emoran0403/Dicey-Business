@@ -70,14 +70,17 @@ $(`#newdie`).click(function () {
 
   console.log(currentDice); //*logging
 
-  //************************************************************ */ single click will reroll a single die
+  //************************************************************single click will reroll a single die
   myPageDie.click(() => {
     // anonymous functions!
 
-    let thisDieId = myDie.id; // gets the id of the die, so it knows which one to roll later
+    let thisDieId = myDie.id; // gets the id of the die, so it knows which one to roll
 
-    currentDice[thisDieId].roll(); // calls the roll function, giving the die a new value
-    setDisplay(); // updates the display for all die on the page
+    currentDice[thisDieId].roll(); // rolls the die that was clicked. roll updates the new value
+
+    myPageDie.text(currentDice[thisDieId].value); // sets the text as the value
+
+    setDisplay(); // makes sure the display respects the pipsActive state
   });
 
   $(myPageDie).appendTo(mydieholder); //appends the die to the page
