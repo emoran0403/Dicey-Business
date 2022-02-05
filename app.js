@@ -59,7 +59,7 @@ $(`#newdie`).click(function () {
   let mydieholder = $(`<div class="dieParent col-1 my-3">`); // this div holds the die
   let myPageDie = $(`<div class="die py-3">`) // this div is the representation of the die
     .addClass(
-      "die border border-dark border-4 rounded d-flex justify-content-center align-items-center"
+      "die noselect border border-dark border-4 rounded d-flex justify-content-center align-items-center"
     )
     .attr("id", myDie.id); // matches the die representation id to be the same as the id of the object die
 
@@ -68,13 +68,13 @@ $(`#newdie`).click(function () {
   myPageDie.text(myDie.value);
   currentDice.push(myDie); // adds the die to the currentDice array
 
-  console.log(currentDice); //*logging
+  // console.log(currentDice); //*logging
 
-  //************************************************************single click will reroll a single die
+  // single click will reroll a single die
   myPageDie.click(() => {
     // anonymous functions!
 
-    let thisDieId = myDie.id; // gets the id of the die, so it knows which one to roll
+    let thisDieId = myDie.id; // gets the id of the die, so it knows which is being clicked
 
     currentDice[thisDieId].roll(); // rolls the die that was clicked. roll updates the new value
 
@@ -83,12 +83,22 @@ $(`#newdie`).click(function () {
     setDisplay(); // makes sure the display respects the pipsActive state
   });
 
-  $(myPageDie).appendTo(mydieholder); //appends the die to the page
-  $(mydieholder).appendTo(dieContainer);
+  // double click will remove the die from the page
+  // myPageDie.dblclick(() => {
+  //   let thisDieId = myDie.id; // gets the id of the die, so it knows which one is being double clicked
+  //   console.log(`double click has fired`);
+  //   // console.log(currentDice);
+  //   currentDice.splice(thisDieId, 1); // finds the die that was clicked in the array, and removes it from the array
+  //   mydieholder.remove();
+  //   myPageDie.remove();
+  // });
+
+  $(myPageDie).appendTo(mydieholder); // appends the die to the container
+  $(mydieholder).appendTo(dieContainer); // appends the container to the page
   setDisplay(); // this must be after appending, since setDisplay depends on the allDieObject
 });
 
-// loops through the currentDice array, calls the reroll method on each die, and updates the display
+// this button loops through the currentDice array, calls the reroll method on each die, and updates the display
 $(`#reroll`).click(function () {
   for (let i = 0; i < currentDice.length; i++) {
     // console.log(`my for loop is working`); //* logging
@@ -100,7 +110,7 @@ $(`#reroll`).click(function () {
   setDisplay();
 });
 
-// calls a function that returns the value of each die in the currentDice aray
+// this buttoncalls a function that returns the value of each die in the currentDice aray
 $(`#sum`).click(function () {
   console.log(`sum was pressed`);
   let sum = 0;
@@ -110,6 +120,7 @@ $(`#sum`).click(function () {
   alert(sum);
 });
 
+// this button flips the state of pipsActive, then calls setDisplay()
 $(`#pip`).click(function () {
   // this toggles the pip display, then calls the setDisplay function to set the display changes
   if (pipsActive) {
@@ -122,8 +133,8 @@ $(`#pip`).click(function () {
   setDisplay(); // change the display to reflect the new pip state
 });
 
+// this function updates the display of all die on screen to reflect the current pip state
 function setDisplay() {
-  // this function updates the display of all die on screen to reflect the current pip state
   if (pipsActive) {
     // this runs when pips are active
     for (i = 0; i < allDieObject.length; i++) {
