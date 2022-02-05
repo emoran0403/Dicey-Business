@@ -70,28 +70,51 @@ $(`#newdie`).click(function () {
 
   // console.log(currentDice); //*logging
 
-  // single click will reroll a single die
+  //! single click will reroll a single die
   myPageDie.click(() => {
     // anonymous functions!
+    console.log(`single click has fired`);
 
     let thisDieId = myDie.id; // gets the id of the die, so it knows which is being clicked
 
-    currentDice[thisDieId].roll(); // rolls the die that was clicked. roll updates the new value
+    let indexToRoll = currentDice.findIndex(idProp);
 
-    myPageDie.text(currentDice[thisDieId].value); // sets the text as the value
+    function idProp(objectHere) {
+      return objectHere.id === thisDieId;
+    }
+
+    // console.log(currentDice[thisDieId]);
+    currentDice[indexToRoll].roll(); // rolls the die that was clicked. roll updates the new value
+
+    myPageDie.text(currentDice[indexToRoll].value); // sets the text as the value
 
     setDisplay(); // makes sure the display respects the pipsActive state
   });
 
-  // double click will remove the die from the page
-  // myPageDie.dblclick(() => {
-  //   let thisDieId = myDie.id; // gets the id of the die, so it knows which one is being double clicked
-  //   console.log(`double click has fired`);
-  //   // console.log(currentDice);
-  //   currentDice.splice(thisDieId, 1); // finds the die that was clicked in the array, and removes it from the array
-  //   mydieholder.remove();
-  //   myPageDie.remove();
-  // });
+  //! double click will remove the die from the page
+
+  myPageDie.dblclick(() => {
+    let thisDieId2 = myDie.id; // gets the id of the die, so it knows which one is being double clicked
+    console.log(`double click has fired`);
+    // console.log(currentDice);
+
+    let indexToKill = currentDice.findIndex(idProp);
+
+    function idProp(objectHere) {
+      return objectHere.id === thisDieId2;
+    }
+
+    currentDice.splice(indexToKill, 1);
+
+    mydieholder.remove();
+    $(`#${thisDieId2}`).remove();
+
+    // go into the array, find the object with the property that matches the id, then delete that object from the array
+    // for (let i = 0; i < currentDice.length; i++) {
+
+    //   // currentDice.splice(thisDieId2, 1); // removes the die from the array
+    // }
+  });
 
   $(myPageDie).appendTo(mydieholder); // appends the die to the container
   $(mydieholder).appendTo(dieContainer); // appends the container to the page
@@ -220,20 +243,10 @@ function setDisplay() {
 
 /**
  *
- * new die immediately rolls a value
- * call func setDisplay
  *
- *
- * reroll rolls new values for all die
- * call func setDisplay
- *
- * pips button is just a toggle for the pips state
- *
- *
- *function setDisplay can do this:
- *then it must check the state of the pips
- * true - display pips
- * false - display numbers
+ * findIndex() will return the index of the first element that passes a test
+ * i can use this to get the index of the object with the id i want
+ * then i can pass this id to slice()
  *
  *
  *
