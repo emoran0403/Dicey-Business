@@ -22,7 +22,7 @@ let dieContainer = $(`#dieContainer`); // this is the div that holds an individu
 
 let pipsActive = false; // this controls the state of displaying pips or not
 
-let allDieObject = document.getElementsByClassName("die"); // this is an array of objects that contains each die-div on screen - use: allDieObject[i].innerText
+let allDieObject = document.getElementsByClassName("die"); // this is object that contains each die-div on screen - use: allDieObject[i].innerText
 
 let currentDice = []; // this array will hold all the die objects
 
@@ -75,6 +75,8 @@ $(`#newdie`).click(function () {
     // anonymous functions!
     console.log(`single click has fired`);
 
+    allDieObject = document.getElementsByClassName("die");
+
     let thisDieId = myDie.id; // gets the id of the die, so it knows which is being clicked
 
     let indexToRoll = currentDice.findIndex(idProp);
@@ -95,28 +97,27 @@ $(`#newdie`).click(function () {
 
   //? when i remove the first die, it will not let me reroll the last die on the screen
   //? when i remove the first 2 die, it will not let me reroll the last 2 die on screen
+  //*
 
   myPageDie.dblclick(() => {
     let thisDieId2 = myDie.id; // gets the id of the die, so it knows which one is being double clicked
     console.log(`double click has fired`);
     // console.log(currentDice);
 
-    let indexToKill = currentDice.findIndex(idProp);
+    let indexToKill = currentDice.findIndex(idProp); // gets the index of the first element that passes the test described in the function below
 
     function idProp(objectHere) {
+      // the test is if the property of the object in the array matches the id of the die being clicked
       return objectHere.id === thisDieId2;
     }
 
-    currentDice.splice(indexToKill, 1);
+    currentDice.splice(indexToKill, 1); // this removes the die from the currentDice array
 
-    mydieholder.remove();
-    $(`#${thisDieId2}`).remove();
+    mydieholder.remove(); // removes the element from the page.  this is the outer box around the die
+    $(`#${thisDieId2}`).remove(); // finds the id matching the die that was clicked on, and removes the die number from the screen
 
-    // go into the array, find the object with the property that matches the id, then delete that object from the array
-    // for (let i = 0; i < currentDice.length; i++) {
-
-    //   // currentDice.splice(thisDieId2, 1); // removes the die from the array
-    // }
+    console.log(allDieObject);
+    console.log(currentDice);
   });
 
   $(myPageDie).appendTo(mydieholder); // appends the die to the container
@@ -127,13 +128,26 @@ $(`#newdie`).click(function () {
 // this button loops through the currentDice array, calls the reroll method on each die, and updates the display
 $(`#reroll`).click(function () {
   for (let i = 0; i < currentDice.length; i++) {
-    // console.log(`my for loop is working`); //* logging
     currentDice[i].roll(); // runs through the array, calling the roll function on each object
+
     let newRoll = currentDice[i].value; // stores the value in a variable
-    $(`#${i}`).text(newRoll); // sets the value as that text
+
+    $(`#${i}`).text(newRoll); // selects the id on page and sets the value as that text
   }
+
+  //*the id on the page must match the object id from the currentDice array
+  /**
+   *
+   *
+   * if id on page === die.id from array, then id.text(newRoll)
+   */
+
   console.log(currentDice); //* logging
+
   setDisplay();
+
+  var audio = new Audio("RollSound.mp3");
+  audio.play();
 });
 
 // this buttoncalls a function that returns the value of each die in the currentDice aray
