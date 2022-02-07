@@ -143,7 +143,7 @@ $(`#sum`).click(function () {
   for (let i = 0; i < currentDice.length; i++) {
     sum += currentDice[i].value;
   }
-  alert(sum);
+  swal.fire(`Your sum is ${sum}`);
 });
 
 // this button flips the state of pipsActive, then calls setDisplay()
