@@ -128,11 +128,13 @@ $(`#newdie`).click(function () {
 // this button loops through the currentDice array, calls the reroll method on each die, and updates the display
 $(`#reroll`).click(function () {
   for (let i = 0; i < currentDice.length; i++) {
-    currentDice[i].roll(); // runs through the array, calling the roll function on each object
+    let currentDie = currentDice[i];
 
-    let newRoll = currentDice[i].value; // stores the value in a variable
+    currentDie.roll(); // runs through the array, calling the roll function on each object
 
-    $(`#${i}`).text(newRoll); // selects the id on page and sets the value as that text
+    let newRoll = currentDie.value; // stores the value in a variable
+
+    $(`#${currentDie.id}`).text(newRoll); // selects the id on page and sets the value as that text
   }
 
   //*the id on the page must match the object id from the currentDice array
@@ -270,3 +272,13 @@ function setDisplay() {
  *
  *
  */
+
+currentDice.forEach(function (currentDie) {
+  currentDie.roll();
+  let newRoll = currentDie.value; // stores the value in a variable
+  $(`#${currentDie.id}`).text(newRoll); // selects the id on page and sets the value as that text
+});
+
+for (let i = 0; i < currentDice.length; i++) {
+  let currentDie = currentDice[i]; // runs through the array, calling the roll function on each object
+}
